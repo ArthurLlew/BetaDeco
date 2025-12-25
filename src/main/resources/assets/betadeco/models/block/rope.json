@@ -1,0 +1,30 @@
+{
+  "parent": "block/block",
+  "render_type": "cutout",
+  "textures": {
+    "particle": "betadeco:block/rope",
+    "all": "betadeco:block/rope"
+  },
+  "elements": [
+    {
+      "from": [ 6, 0, 8 ],
+      "to": [ 10, 16, 8 ],
+      "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45},
+      "shade": false,
+      "faces": {
+        "north": { "uv": [ 10, 0, 6, 16 ], "texture": "#all" },
+        "south": { "uv": [ 6, 0, 10, 16 ], "texture": "#all" }
+      }
+    },
+    {
+      "from": [ 8, 0, 6 ],
+      "to": [ 8, 16, 10 ],
+      "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45},
+      "shade": false,
+      "faces": {
+        "west": { "uv": [ 10, 0, 6, 16 ], "texture": "#all" },
+        "east": { "uv": [ 6, 0, 10, 16 ], "texture": "#all" }
+      }
+    }
+  ]
+}

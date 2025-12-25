@@ -1,0 +1,14 @@
+{
+  "deko_window_open": {
+    "subtitle": "sounds.betadeco.deko_window_open",
+    "sounds": [
+      "betadeco:deko_window_open"
+    ]
+  },
+  "deko_window_close": {
+    "subtitle": "sounds.betadeco.deko_window_close",
+    "sounds": [
+      "betadeco:deko_window_close"
+    ]
+  }
+}

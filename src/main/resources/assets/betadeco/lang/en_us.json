@@ -1,0 +1,10 @@
+{
+  "itemgroup.betadeco.decorations" : "Beta Decorations",
+
+  "block.betadeco.deko_window" : "Deko Window",
+  "block.betadeco.rope" : "Rope",
+  "item.betadeco.kaevator_wallpaper" : "Kaevator's Wallpaper",
+
+  "sounds.betadeco.deko_window_open" : "Deko Window Opened",
+  "sounds.betadeco.deko_window_close" : "Deko Window Closed"
+}
