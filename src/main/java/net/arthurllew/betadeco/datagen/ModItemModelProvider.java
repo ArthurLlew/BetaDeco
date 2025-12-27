@@ -27,14 +27,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {
         return withExistingParent(item.getId().getPath(),
                 ResourceLocation
-                        .fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+                        .withDefaultNamespace("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(BetaDeco.MODID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleBlockItem(DeferredBlock<? extends Block> block) {
         return withExistingParent(block.getId().getPath(),
                 ResourceLocation
-                        .fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+                        .withDefaultNamespace("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(BetaDeco.MODID,"block/" + block.getId().getPath()));
     }
 }
