@@ -216,32 +216,32 @@ public class KaevatorWallpaperEntity extends HangingEntity {
      * Writes custom NBT data into save file.
      */
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(CompoundTag tag) {
         // Write facing
-        compound.putByte("facing", (byte)this.direction.get3DDataValue());
+        tag.putByte("facing", (byte)this.direction.get3DDataValue());
         // Write variant
-        compound.putByte("variant", getVariant());
+        tag.putByte("variant", getVariant());
         // Write color
-        compound.putInt("color", getColor());
+        tag.putInt("color", getColor());
 
         // Write parent data
-        super.addAdditionalSaveData(compound);
+        super.addAdditionalSaveData(tag);
     }
 
     /**
      * Reads custom NBT data from save file.
      */
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(CompoundTag tag) {
         // Read parent data
-        super.readAdditionalSaveData(compound);
+        super.readAdditionalSaveData(tag);
 
         // Read color
-        this.entityData.set(COLOR, compound.getInt("color"));
+        this.entityData.set(COLOR, tag.getInt("color"));
         // Read variant
-        this.entityData.set(VARIANT, compound.getByte("variant"));
+        this.entityData.set(VARIANT, tag.getByte("variant"));
         // Read facing
-        this.direction = Direction.from3DDataValue(compound.getByte("facing"));
+        this.direction = Direction.from3DDataValue(tag.getByte("facing"));
 
         // Set facing
         this.setDirection(this.direction);
