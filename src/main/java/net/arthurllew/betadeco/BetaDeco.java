@@ -18,7 +18,7 @@ public class BetaDeco {
     public static final String MODID = "betadeco";
 
     /**
-     * Basic mod init.
+     * Mod constructor. Performs basic mod init.
      */
     public BetaDeco(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for mod loading
