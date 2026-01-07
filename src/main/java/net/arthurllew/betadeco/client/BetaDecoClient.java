@@ -1,7 +1,8 @@
-package net.arthurllew.betadeco.registry;
+package net.arthurllew.betadeco.client;
 
 import net.arthurllew.betadeco.BetaDeco;
 import net.arthurllew.betadeco.client.render.KaevatorWallpaperRenderer;
+import net.arthurllew.betadeco.registry.BetaDecoEntityTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -11,7 +12,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod(value = BetaDeco.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = BetaDeco.MODID, value = Dist.CLIENT)
-public class BetaDecoRendererRegister {
+public class BetaDecoClient {
     /**
      * Mod setup on client.
      */
