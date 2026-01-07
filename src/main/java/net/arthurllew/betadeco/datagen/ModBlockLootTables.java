@@ -1,6 +1,6 @@
 package net.arthurllew.betadeco.datagen;
 
-import net.arthurllew.betadeco.block.BetaDecoBlocks;
+import net.arthurllew.betadeco.registry.BetaDecoBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;

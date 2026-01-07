@@ -1,6 +1,6 @@
 package net.arthurllew.betadeco.item;
 
-import net.arthurllew.betadeco.entity.decoration.KaevatorWallpaperEntity;
+import net.arthurllew.betadeco.entity.KaevatorWallpaperEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,14 +24,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class KaevatorWallpaperItem extends HangingEntityItem {
+public class KaevatorWallpaperItem extends Item {
     /**
      * Constructor matching super.
-     * @param entityType entity type
      * @param settings item settings.
      */
-    public KaevatorWallpaperItem(EntityType<KaevatorWallpaperEntity> entityType, Item.Properties settings) {
-        super(entityType, settings);
+    public KaevatorWallpaperItem(Item.Properties settings) {
+        super(settings);
     }
 
     /**
@@ -78,5 +77,12 @@ public class KaevatorWallpaperItem extends HangingEntityItem {
                 return InteractionResult.CONSUME;
             }
         }
+    }
+
+    /**
+     * @return whether item can be placed (code adopted from {@link HangingEntityItem})
+     */
+    protected boolean mayPlace(Player player, Direction direction, ItemStack hangingEntityStack, BlockPos pos) {
+        return !direction.getAxis().isVertical() && player.mayUseItemAt(pos, direction, hangingEntityStack);
     }
 }

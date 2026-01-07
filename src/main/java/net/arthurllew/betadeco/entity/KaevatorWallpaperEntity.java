@@ -1,7 +1,7 @@
-package net.arthurllew.betadeco.entity.decoration;
+package net.arthurllew.betadeco.entity;
 
-import net.arthurllew.betadeco.entity.BetaDecoEntityTypes;
-import net.arthurllew.betadeco.item.BetaDecoItems;
+import net.arthurllew.betadeco.registry.BetaDecoEntityTypes;
+import net.arthurllew.betadeco.registry.BetaDecoItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,8 +1,8 @@
 package net.arthurllew.betadeco.datagen;
 
 import net.arthurllew.betadeco.BetaDeco;
-import net.arthurllew.betadeco.block.BetaDecoBlocks;
-import net.arthurllew.betadeco.item.BetaDecoItems;
+import net.arthurllew.betadeco.registry.BetaDecoBlocks;
+import net.arthurllew.betadeco.registry.BetaDecoItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

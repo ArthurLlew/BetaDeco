@@ -1,13 +1,12 @@
 package net.arthurllew.betadeco;
 
-import net.arthurllew.betadeco.block.BetaDecoBlocks;
-import net.arthurllew.betadeco.entity.BetaDecoEntityTypes;
-import net.arthurllew.betadeco.item.BetaDecoItems;
-import net.arthurllew.betadeco.sound.BetaDecoSounds;
+import net.arthurllew.betadeco.registry.BetaDecoBlocks;
+import net.arthurllew.betadeco.registry.BetaDecoEntityTypes;
+import net.arthurllew.betadeco.registry.BetaDecoItems;
+import net.arthurllew.betadeco.registry.BetaDecoSounds;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod(BetaDeco.MODID)
@@ -20,7 +19,7 @@ public class BetaDeco {
     /**
      * Mod constructor. Performs basic mod init.
      */
-    public BetaDeco(IEventBus modEventBus, ModContainer modContainer) {
+    public BetaDeco(IEventBus modEventBus) {
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 

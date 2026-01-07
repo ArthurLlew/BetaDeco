@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.arthurllew.betadeco.BetaDeco;
-import net.arthurllew.betadeco.entity.decoration.KaevatorWallpaperEntity;
+import net.arthurllew.betadeco.entity.KaevatorWallpaperEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

@@ -1,7 +1,8 @@
-package net.arthurllew.betadeco.block;
+package net.arthurllew.betadeco.registry;
 
 import net.arthurllew.betadeco.BetaDeco;
-import net.arthurllew.betadeco.item.BetaDecoItems;
+import net.arthurllew.betadeco.block.RopeBlock;
+import net.arthurllew.betadeco.block.WindowBlock;
 import net.arthurllew.betadeco.item.RopeBlockItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

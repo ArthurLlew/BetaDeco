@@ -1,7 +1,7 @@
-package net.arthurllew.betadeco.entity;
+package net.arthurllew.betadeco.registry;
 
 import net.arthurllew.betadeco.BetaDeco;
-import net.arthurllew.betadeco.entity.decoration.KaevatorWallpaperEntity;
+import net.arthurllew.betadeco.entity.KaevatorWallpaperEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

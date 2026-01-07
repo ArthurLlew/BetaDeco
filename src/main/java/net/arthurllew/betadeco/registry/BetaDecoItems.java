@@ -1,7 +1,7 @@
-package net.arthurllew.betadeco.item;
+package net.arthurllew.betadeco.registry;
 
 import net.arthurllew.betadeco.BetaDeco;
-import net.arthurllew.betadeco.block.BetaDecoBlocks;
+import net.arthurllew.betadeco.item.KaevatorWallpaperItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,7 +27,7 @@ public class BetaDecoItems {
      */
     public static final DeferredItem<KaevatorWallpaperItem> KAEVATOR_WALLPAPER =
             ITEMS.register("kaevator_wallpaper",
-                    () -> new KaevatorWallpaperItem(null, new Item.Properties()));
+                    () -> new KaevatorWallpaperItem(new Item.Properties()));
 
     /**
      * Beta Deco item group.

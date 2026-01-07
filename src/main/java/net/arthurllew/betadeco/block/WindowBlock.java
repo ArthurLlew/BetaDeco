@@ -1,6 +1,6 @@
 package net.arthurllew.betadeco.block;
 
-import net.arthurllew.betadeco.sound.BetaDecoSounds;
+import net.arthurllew.betadeco.registry.BetaDecoSounds;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

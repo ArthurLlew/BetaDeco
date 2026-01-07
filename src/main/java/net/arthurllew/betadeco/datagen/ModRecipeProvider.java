@@ -1,7 +1,7 @@
 package net.arthurllew.betadeco.datagen;
 
-import net.arthurllew.betadeco.block.BetaDecoBlocks;
-import net.arthurllew.betadeco.item.BetaDecoItems;
+import net.arthurllew.betadeco.registry.BetaDecoBlocks;
+import net.arthurllew.betadeco.registry.BetaDecoItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
