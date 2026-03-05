@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(BetaDecoItems.KAEVATOR_WALLPAPER);
         simpleBlockItem(BetaDecoBlocks.ROPE);
+        simpleBlockItem(BetaDecoBlocks.BETA_GARVEL);
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {

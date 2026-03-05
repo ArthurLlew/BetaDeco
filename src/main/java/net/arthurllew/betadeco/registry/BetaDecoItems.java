@@ -40,5 +40,6 @@ public class BetaDecoItems {
                         output.accept(BetaDecoBlocks.DEKO_WINDOW.get());
                         output.accept(BetaDecoBlocks.ROPE.get());
                         output.accept(KAEVATOR_WALLPAPER.get());
+                        output.accept(BetaDecoBlocks.BETA_GARVEL.get());
                     }).build());
 }

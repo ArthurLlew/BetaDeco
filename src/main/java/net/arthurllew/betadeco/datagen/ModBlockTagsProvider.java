@@ -24,5 +24,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(BetaDecoBlocks.DEKO_WINDOW.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BetaDecoBlocks.BETA_GARVEL.get());
     }
 }

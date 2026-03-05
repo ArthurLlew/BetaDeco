@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "betadeco:beta_gravel"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:gravel"
+  }
+}
