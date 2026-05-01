@@ -23,7 +23,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Drop themselves
         this.dropSelf(BetaDecoBlocks.DEKO_WINDOW.get());
         this.dropSelf(BetaDecoBlocks.ROPE.get());
-        this.dropSelf(BetaDecoBlocks.BETA_GARVEL.get());
     }
 
     @Override

@@ -13,6 +13,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+@SuppressWarnings({"SameParameterValue", "UnusedReturnValue"})
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, BetaDeco.MODID, existingFileHelper);
@@ -22,7 +23,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(BetaDecoItems.KAEVATOR_WALLPAPER);
         simpleBlockItem(BetaDecoBlocks.ROPE);
-        simpleBlockItem(BetaDecoBlocks.BETA_GARVEL);
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {

@@ -158,17 +158,12 @@ public class WindowBlock extends Block {
         boolean isOpened = state.getValue(OPEN);
         boolean isHingeRight = state.getValue(HINGE) == DoorHingeSide.RIGHT;
 
-        switch (state.getValue(FACING)) {
-            case NORTH:
-                return isOpened ? (isHingeRight ? EAST_SHAPE : WEST_SHAPE) : NORTH_SHAPE;
-            case WEST:
-                return isOpened ? (isHingeRight ? NORTH_SHAPE : SOUTH_SHAPE) : WEST_SHAPE;
-            case SOUTH:
-                return isOpened ? (isHingeRight ? WEST_SHAPE : EAST_SHAPE) : SOUTH_SHAPE;
-            case EAST:
-            default:
-                return isOpened ? (isHingeRight ? SOUTH_SHAPE : NORTH_SHAPE) : EAST_SHAPE;
-        }
+        return switch (state.getValue(FACING)) {
+            case NORTH -> isOpened ? (isHingeRight ? EAST_SHAPE : WEST_SHAPE) : NORTH_SHAPE;
+            case WEST -> isOpened ? (isHingeRight ? NORTH_SHAPE : SOUTH_SHAPE) : WEST_SHAPE;
+            case SOUTH -> isOpened ? (isHingeRight ? WEST_SHAPE : EAST_SHAPE) : SOUTH_SHAPE;
+            default -> isOpened ? (isHingeRight ? SOUTH_SHAPE : NORTH_SHAPE) : EAST_SHAPE;
+        };
     }
 
     /**
@@ -259,13 +254,10 @@ public class WindowBlock extends Block {
      */
     @Override
     public boolean isPathfindable(BlockState state, PathComputationType type) {
-        switch (type) {
-            case LAND:
-            case AIR:
-                return state.getValue(OPEN);
-            default:
-                return false;
-        }
+        return switch (type) {
+            case LAND, AIR -> state.getValue(OPEN);
+            default -> false;
+        };
     }
 
     /**

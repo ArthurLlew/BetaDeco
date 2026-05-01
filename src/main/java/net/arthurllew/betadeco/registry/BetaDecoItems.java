@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class BetaDecoItems {
     /**
      * Deferred Register for items.
@@ -40,6 +41,5 @@ public class BetaDecoItems {
                         output.accept(BetaDecoBlocks.DEKO_WINDOW.get());
                         output.accept(BetaDecoBlocks.ROPE.get());
                         output.accept(KAEVATOR_WALLPAPER.get());
-                        output.accept(BetaDecoBlocks.BETA_GARVEL.get());
                     }).build());
 }

@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChainBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -37,15 +36,11 @@ public class RopeBlock extends ChainBlock {
      * @return block voxel shape (collision, outline, etc.)
      */
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        switch (state.getValue(AXIS)) {
-            case Z:
-                return Z_AXIS_AABB;
-            case Y:
-                return Y_AXIS_AABB;
-            case X:
-            default:
-                return X_AXIS_AABB;
-        }
+        return switch (state.getValue(AXIS)) {
+            case Z -> Z_AXIS_AABB;
+            case Y -> Y_AXIS_AABB;
+            default -> X_AXIS_AABB;
+        };
     }
 
     /**
@@ -89,12 +84,5 @@ public class RopeBlock extends ChainBlock {
 
         // Horizontal directions are not checked
         return true;
-    }
-
-    /**
-     * @return {@code false} to make AI treat this block as solid (or something like it).
-     */
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
-        return false;
     }
 }
