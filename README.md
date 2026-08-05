@@ -1,6 +1,7 @@
 Beta Deco
 ==========================================================
-Port of content from several Beta 1.7.3 mods. Includes:
+Port of content from several Beta 1.7.3 decoration mods.
+Includes:
 1) Kaevator's Wallpaper: wallpaper decoration entity
 2) Deko-Mod: window (half-door-like) block
 3) Rope mod: climbable rope block
