@@ -42,6 +42,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class KaevatorWallpaperEntity extends HangingEntity {
     /**
+     * Maximum number of wallpaper variants.
+     */
+    private static final byte MAX_VARIANTS = 24;
+
+    /**
      * Wallpaper variant.
      */
     private static final EntityDataAccessor<Byte> VARIANT =
@@ -145,8 +150,12 @@ public class KaevatorWallpaperEntity extends HangingEntity {
             if (itemStack.is(BetaDecoItems.KAEVATOR_WALLPAPER.get())) {
                 // Cycle wallpaper variant
                 byte variant = this.getVariant();
-                variant++; // Avoids conversion from int to byte
-                variant = variant < 24 ? variant : 0;
+                if (player.isCrouching()) {
+                    variant = (byte)((variant - 1 + MAX_VARIANTS) % MAX_VARIANTS);
+                }
+                else {
+                    variant = (byte)((variant + 1) % MAX_VARIANTS);
+                }
 
                 // Server-side actions
                 if (!this.level().isClientSide) {
