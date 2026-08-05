@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
@@ -47,7 +48,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput);
 
         // Kaevator's Wallpaper
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, BetaDecoItems.KAEVATOR_WALLPAPER.get(), 6)
+        ItemStack wallpaper = BetaDecoItems.KAEVATOR_WALLPAPER.get().getDefaultInstance();
+        wallpaper.setCount(6);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, wallpaper)
                 .pattern("PW")
                 .pattern("PW")
                 .pattern("PW")

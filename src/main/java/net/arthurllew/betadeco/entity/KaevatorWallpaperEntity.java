@@ -1,5 +1,7 @@
 package net.arthurllew.betadeco.entity;
 
+import net.arthurllew.betadeco.core.component.WallpaperVariant;
+import net.arthurllew.betadeco.registry.BetaDecoDataComponents;
 import net.arthurllew.betadeco.registry.BetaDecoEntityTypes;
 import net.arthurllew.betadeco.registry.BetaDecoItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -60,11 +62,12 @@ public class KaevatorWallpaperEntity extends HangingEntity {
     /**
      * This constructor is used to spawn entity.
      */
-    public KaevatorWallpaperEntity(Level level, BlockPos pos, Direction facing) {
+    public KaevatorWallpaperEntity(Level level, BlockPos pos, Direction facing, byte variant) {
         super(BetaDecoEntityTypes.KAEVATOR_WALLPAPER_ENTITY_TYPE.get(), level, pos);
-
         // Set facing
         this.setDirection(facing);
+        // Set wallpaper variant
+        this.entityData.set(VARIANT, variant);
     }
 
     /**
@@ -99,13 +102,12 @@ public class KaevatorWallpaperEntity extends HangingEntity {
      */
     @Override
     protected AABB calculateBoundingBox(BlockPos pos, Direction direction) {
-        float f = 0.46875F;
-        Vec3 vec3 = Vec3.atCenterOf(pos).relative(direction, (double)-0.46875F);
+        Vec3 vec3 = Vec3.atCenterOf(pos).relative(direction, -0.46875F);
         Direction.Axis directionAxis = direction.getAxis();
-        double d0 = directionAxis == Direction.Axis.X ? 0.46875D : 1.0D;
-        double d1 = directionAxis == Direction.Axis.Y ? 0.46875D : 1.0D;
-        double d2 = directionAxis == Direction.Axis.Z ? 0.46875D : 1.0D;
-        return AABB.ofSize(vec3, d0, d1, d2);
+        double xSize = directionAxis == Direction.Axis.X ? 0.46875D : 1.0D;
+        double ySize = directionAxis == Direction.Axis.Y ? 0.46875D : 1.0D;
+        double zSize = directionAxis == Direction.Axis.Z ? 0.46875D : 1.0D;
+        return AABB.ofSize(vec3, xSize, ySize, zSize);
     }
 
     /**
@@ -137,34 +139,47 @@ public class KaevatorWallpaperEntity extends HangingEntity {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        // World is not client, hand is not empty and entity is not removed
-        if (!this.level().isClientSide && !itemStack.isEmpty() && !this.isRemoved()) {
+        // Hand is not empty and entity is not removed
+        if (!itemStack.isEmpty() && !this.isRemoved()) {
             // If wallpaper is in hand
             if (itemStack.is(BetaDecoItems.KAEVATOR_WALLPAPER.get())) {
                 // Cycle wallpaper variant
                 byte variant = this.getVariant();
                 variant++; // Avoids conversion from int to byte
-                this.entityData.set(VARIANT, variant < 24 ? variant : 0);
+                variant = variant < 24 ? variant : 0;
 
-                // Emit event to tell that block was changed
-                this.gameEvent(GameEvent.BLOCK_CHANGE, player);
-
-                // Action succeeded
-                return InteractionResult.SUCCESS;
-            // If dye in hand
-            } else if (itemStack.getItem() instanceof DyeItem dye) {
-                // Color should differ
-                int color = dye.getDyeColor().getFireworkColor();
-                if (color != getColor()) {
-                    // Change color
-                    this.entityData.set(COLOR, dye.getDyeColor().getFireworkColor());
-                    // Decrement item stack if player is not in creative
-                    if (!player.isCreative()) {
-                        itemStack.shrink(1);
-                    }
+                // Server-side actions
+                if (!this.level().isClientSide) {
+                    // Set wallpaper variant
+                    this.entityData.set(VARIANT, variant);
 
                     // Emit event to tell that block was changed
                     this.gameEvent(GameEvent.BLOCK_CHANGE, player);
+                }
+
+                // Remember last used variant inside item
+                itemStack.set(BetaDecoDataComponents.WALLPAPER_VARIANT_COMPONENT.get(), new WallpaperVariant(variant));
+
+                // Action succeeded
+                return InteractionResult.SUCCESS;
+            }
+            // If dye in hand
+            else if (itemStack.getItem() instanceof DyeItem dye) {
+                // Color should differ
+                int color = dye.getDyeColor().getFireworkColor();
+                if (color != getColor()) {
+                    // Server-side actions
+                    if (!this.level().isClientSide) {
+                        // Change color
+                        this.entityData.set(COLOR, dye.getDyeColor().getFireworkColor());
+                        // Decrement item stack if player is not in creative
+                        if (!player.isCreative()) {
+                            itemStack.shrink(1);
+                        }
+
+                        // Emit event to tell that block was changed
+                        this.gameEvent(GameEvent.BLOCK_CHANGE, player);
+                    }
 
                     // Action succeeded
                     return InteractionResult.SUCCESS;
@@ -187,7 +202,7 @@ public class KaevatorWallpaperEntity extends HangingEntity {
             if (entity instanceof Player playerEntity && playerEntity.getAbilities().instabuild) {
                 return;
             }
-            this.spawnAtLocation(BetaDecoItems.KAEVATOR_WALLPAPER.get());
+            this.spawnAtLocation(BetaDecoItems.KAEVATOR_WALLPAPER.get().getDefaultInstance());
         }
     }
 

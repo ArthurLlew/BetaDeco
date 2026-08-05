@@ -1,6 +1,8 @@
 package net.arthurllew.betadeco.item;
 
+import net.arthurllew.betadeco.core.component.WallpaperVariant;
 import net.arthurllew.betadeco.entity.KaevatorWallpaperEntity;
+import net.arthurllew.betadeco.registry.BetaDecoDataComponents;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -51,9 +53,13 @@ public class KaevatorWallpaperItem extends Item {
         if (player != null && !this.mayPlace(player, facing, itemStack, blockPos2)) {
             return InteractionResult.FAIL;
         } else {
+            // Get wallpaper variant from item stack
+            WallpaperVariant boxedVariant = itemStack.get(BetaDecoDataComponents.WALLPAPER_VARIANT_COMPONENT.get());
+            byte variant = (boxedVariant != null) ? boxedVariant.value() : 0;
+
             // Create wallpaper
             Level level = context.getLevel();
-            HangingEntity wallpaper = new KaevatorWallpaperEntity(level, blockPos2, facing);
+            HangingEntity wallpaper = new KaevatorWallpaperEntity(level, blockPos2, facing, variant);
 
             // Check custom data
             CustomData data = itemStack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
@@ -77,6 +83,16 @@ public class KaevatorWallpaperItem extends Item {
                 return InteractionResult.CONSUME;
             }
         }
+    }
+
+    /**
+     * @return default item stack for this item.
+     */
+    @Override
+    public ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        stack.set(BetaDecoDataComponents.WALLPAPER_VARIANT_COMPONENT.get(), new WallpaperVariant((byte)0));
+        return stack;
     }
 
     /**

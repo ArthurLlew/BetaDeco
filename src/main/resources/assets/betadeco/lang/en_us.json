@@ -4,6 +4,7 @@
   "block.betadeco.deko_window" : "Deko Window",
   "block.betadeco.rope" : "Rope",
   "item.betadeco.kaevator_wallpaper" : "Kaevator's Wallpaper",
+  "tooltip.betadeco.kaevator_wallpaper" : "Variant %s",
 
   "sounds.betadeco.deko_window_open" : "Deko Window Opened",
   "sounds.betadeco.deko_window_close" : "Deko Window Closed"

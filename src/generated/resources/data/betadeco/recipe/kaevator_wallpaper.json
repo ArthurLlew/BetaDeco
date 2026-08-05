@@ -15,6 +15,9 @@
     "PW"
   ],
   "result": {
+    "components": {
+      "betadeco:wallpaper_variant": 0
+    },
     "count": 6,
     "id": "betadeco:kaevator_wallpaper"
   }
