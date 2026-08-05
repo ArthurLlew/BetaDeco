@@ -101,48 +101,62 @@ public class WindowBlock extends Block {
     }
 
     /**
-     * Determines door hinge from context.
+     * Determines door hinge from (see {@link net.minecraft.world.level.block.DoorBlock}).
      * @param context placement context.
      * @return door hinge.
      */
     private DoorHingeSide getHinge(BlockPlaceContext context) {
-        BlockGetter blockView = context.getLevel();
-
-        // Direction player is facing
+        // Block getter
+        BlockGetter level = context.getLevel();
+        // Clocked position
         BlockPos blockPos = context.getClickedPos();
+        // Direction the player is facing
         Direction direction = context.getHorizontalDirection();
+        // Observed block state
+        BlockState blockState;
+
+        // If block below is window derive from it
+        blockState = level.getBlockState(blockPos.below());
+        if (blockState.is(this)) {
+            return blockState.getValue(HINGE);
+        }
+
+        // If block above is window derive from it
+        blockState = level.getBlockState(blockPos.above());
+        if (blockState.is(this)) {
+            return blockState.getValue(HINGE);
+        }
 
         // Block to the left
-        Direction directionLeft = direction.getCounterClockWise();
-        BlockPos blockPosLeft = blockPos.relative(directionLeft);
-        BlockState blockStateLeft = blockView.getBlockState(blockPosLeft);
+        BlockPos blockPosLeft = blockPos.relative(direction.getCounterClockWise());
+        BlockState blockStateLeft = level.getBlockState(blockPosLeft);
         boolean hasWindowLeft = blockStateLeft.is(this);
 
         // Block to the right
-        Direction directionRight = direction.getClockWise();
-        BlockPos blockPosRight = blockPos.relative(directionRight);
-        BlockState blockStateRight = blockView.getBlockState(blockPosRight);
+        BlockPos blockPosRight = blockPos.relative(direction.getClockWise());
+        BlockState blockStateRight = level.getBlockState(blockPosRight);
         boolean hasWindowRight = blockStateRight.is(this);
 
-        // Check left and right blocks
-        if (!hasWindowLeft || hasWindowRight && blockStateLeft.isCollisionShapeFullBlock(blockView, blockPosLeft)) {
-            if (!hasWindowRight || hasWindowLeft && blockStateRight.isCollisionShapeFullBlock(blockView, blockPosRight)) {
-                // Check hit position
-                int offsetX = direction.getStepX();
-                int offsetZ = direction.getStepZ();
-                Vec3 hitPosition = context.getClickLocation();
-                double hitX = hitPosition.x - (double)blockPos.getX();
-                double hitZ = hitPosition.z - (double)blockPos.getZ();
-                return (offsetX >= 0 || !(hitZ < 0.5))
-                        && (offsetX <= 0 || !(hitZ > 0.5))
-                        && (offsetZ >= 0 || !(hitX > 0.5))
-                        && (offsetZ <= 0 || !(hitX < 0.5)) ? DoorHingeSide.LEFT : DoorHingeSide.RIGHT;
-            } else {
-                return DoorHingeSide.LEFT;
-            }
-        } else {
+        // Has window to the left and not has window to the right or block to the right is of correct shape
+        if (hasWindowLeft && (!hasWindowRight || !blockStateLeft.isCollisionShapeFullBlock(level, blockPosLeft))) {
             return DoorHingeSide.RIGHT;
         }
+
+        // Has window to the right and not has window to the right or block to the right is of correct shape
+        if (hasWindowRight && (!hasWindowLeft || !blockStateRight.isCollisionShapeFullBlock(level, blockPosRight))) {
+            return DoorHingeSide.LEFT;
+        }
+
+        // Derive from click position
+        int offsetX = direction.getStepX();
+        int offsetZ = direction.getStepZ();
+        Vec3 hitPosition = context.getClickLocation();
+        double hitX = hitPosition.x - (double)blockPos.getX();
+        double hitZ = hitPosition.z - (double)blockPos.getZ();
+        return (offsetX >= 0 || !(hitZ < 0.5))
+                && (offsetX <= 0 || !(hitZ > 0.5))
+                && (offsetZ >= 0 || !(hitX > 0.5))
+                && (offsetZ <= 0 || !(hitX < 0.5)) ? DoorHingeSide.LEFT : DoorHingeSide.RIGHT;
     }
 
     /**
@@ -193,7 +207,7 @@ public class WindowBlock extends Block {
     }
 
     /**
-     * Determines a new block state after a neighboring block was changed.
+     * Provides a new block state after a neighboring block was changed.
      * @param state block.
      * @param direction block direction.
      * @param neighborState block neighbor.
@@ -216,7 +230,7 @@ public class WindowBlock extends Block {
     }
 
     /**
-     * Called after a neighboring block was changed.
+     * Is called after a neighboring block was changed.
      * @param state block.
      * @param level world.
      * @param pos block position.
